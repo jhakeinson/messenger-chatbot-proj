@@ -6,8 +6,6 @@ on:
       - main
 
 env:
-  DOCKER_HUB_USERNAME: ${{ steps.doppler.outputs.DOCKER_HUB_USERNAME }}
-  DOCKER_HUB_PASSWORD: ${{ steps.doppler.outputs.DOCKER_HUB_PASSWORD }}
   IMAGE_NAME: messenger-chatbot
   DOCKERFILE_PATH: ./Dockerfile
 
@@ -26,8 +24,8 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          username: ${{ env.DOCKER_HUB_USERNAME }}
-          password: ${{ env.DOCKER_HUB_PASSWORD }}
+          username: ${{ steps.doppler.outputs.DOCKER_HUB_USERNAME }}
+          password: ${{ steps.doppler.outputs.DOCKER_HUB_PASSWORD }}
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
