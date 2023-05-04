@@ -3,6 +3,10 @@ FROM node:16.14-alpine AS build
 WORKDIR /app
 
 COPY package*.json ./
+COPY turbo.json ./
+COPY pnpm-workspace.yaml ./
+COPY apps/api/package*.json ./apps/api/
+COPY apps/client/package*.json ./apps/client/
 
 RUN npm install -g pnpm
 
@@ -12,11 +16,17 @@ COPY . .
 
 RUN pnpm run build
 
+###
+
 FROM node:16.14-alpine
 
 WORKDIR /app
 
 COPY package*.json ./
+COPY turbo.json ./
+COPY pnpm-workspace.yaml ./
+COPY apps/api/package*.json ./apps/api/
+COPY apps/client/package*.json ./apps/client/
 
 RUN npm install -g pnpm
 
