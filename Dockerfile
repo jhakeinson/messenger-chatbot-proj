@@ -10,7 +10,7 @@ COPY apps/client/package*.json ./apps/client/
 
 RUN npm install -g pnpm
 
-RUN pnpm install --development
+RUN pnpm install
 
 COPY . .
 
