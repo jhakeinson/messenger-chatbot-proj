@@ -20,12 +20,14 @@ jobs:
         uses: DopplerHQ/secrets-fetch-action@v1.1.0
         with:
           doppler-token: ${{ secrets.DOPPLER_SRV_DEV_TOKEN}}
+          inject-env-vars: true
+      - run: printenv
       
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          username: ${{ steps.doppler.outputs.DOCKER_HUB_USERNAME }}
-          password: ${{ steps.doppler.outputs.DOCKER_HUB_PASSWORD }}
+          username: ${{ env.DOCKER_HUB_USERNAME }}
+          password: ${{ env.DOCKER_HUB_PASSWORD }}
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
